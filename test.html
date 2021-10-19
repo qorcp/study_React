@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document</title>
+  </head>
+  <body>
+      <script>
+        console.log("0.================ 얕은 복사");
+        const m = [1,2,3];
+        const g = m;
+        g.push(4); // g의 데이터 변경
+        console.log('m의 값은:',{m}); // 1,2,3,4
+        console.log('g의 값은:',{g}); // 1,2,3,4
+
+        // 깊은 복서 종류 => concat, filter, map, slice, 스프레드(전개) 연산자
+        // 깊은 복사에서 제일 쉬운방법은 스프레드(전개) 연산자이다.
+        console.log("1.================ 스프레드 연산자");
+        const a = [1,2,3];
+        const b = [...a]; // a를 배열에 흐뿌리고 b라는 공간 생성 / 이경우 b의 값은 = [1,2,3] 이다
+        b.push(4); // b의 데이터 변경
+        console.log('a의 값은:',{a}); // 1,2,3
+        console.log('b의 값은:',{b}); // 1,2,3,4
+
+        console.log("2.================ 추가하기 (concat)");
+        const a2 = [1,2,3];
+        const b2 = a2.concat(4); // a2.push(4) 사용시 b2의 값은 "4"만 들어온다
+        console.log('a2의 값은:',{a2}); // 1,2,3
+        console.log('b2의 값은:',{b2}); // 1,2,3,4
+
+
+
+      </script>
+  </body>
+</html>
