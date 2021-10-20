@@ -16,20 +16,24 @@ const b = 20; // 상수
 
 function App() {
   let c;
-  console.log(1,c);
+  console.log(1,c); // undefined
 
   const myStyle = {
     color:'red'
   };
 
-  let b = [1,2,3,4];
+  let b2 = [1,2,3,4];
+  
+  let list = [1,2,3];
+
   return (
     <div>
       <div style={myStyle}>안녕 {a === 10 ? '10입니다' : '10이 아닙니다'}</div>
       <h1 className="box-style">해딩태그 {b === 20 && '20입니다'}</h1>
       <hr/>
       <input type='text'/>
-      <div>{b[0]}</div>
+      <div>{b2[0]}</div> 
+      <div>{list.map((n)=><h1>{n}</h1>)}</div>
     </div>
   );
 }

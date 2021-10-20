@@ -20,16 +20,75 @@
         const a = [1,2,3];
         const b = [...a]; // a를 배열에 흐뿌리고 b라는 공간 생성 / 이경우 b의 값은 = [1,2,3] 이다
         b.push(4); // b의 데이터 변경
-        console.log('a의 값은:',{a}); // 1,2,3
-        console.log('b의 값은:',{b}); // 1,2,3,4
+        console.log('a의 값은:',a); // 1,2,3
+        console.log('b의 값은:',b); // 1,2,3,4
 
-        console.log("2.================ 추가하기 (concat)");
+        console.log("2.================ 추가하기 (concat)"); // 추가할때 많이 사용한다
         const a2 = [1,2,3];
         const b2 = a2.concat(4); // a2.push(4) 사용시 b2의 값은 "4"만 들어온다
-        console.log('a2의 값은:',{a2}); // 1,2,3
-        console.log('b2의 값은:',{b2}); // 1,2,3,4
+        console.log('a2의 값은:',a2); // 1,2,3
+        console.log('b2의 값은:',b2); // 1,2,3,4
+        // 응용편
+        const c2 = [...a2, 4]; // 배열 뒤에 추가하기
+        console.log('c2의 값은:',c2); // 1,2,3,4
+        const d2 = [0, ...a2]; // 배열 앞에 추가하기
+        console.log('d2의 값은:',d2); // 0,1,2,3
+        const e2 = [0, ...a2, 4]; // 배열 앞뒤로 추가하기
+        console.log('e2의 값은:',e2); // 0,1,2,3,4
+        //*단점* : a2 배열 사이에 값 추가 X
 
+        console.log("3.================ 걸러내기 (filter)"); // 삭제할때 많이 사용한다.
+        const a3 = [1,2,3];
+        // filter 안에는 함수를 넣어야한다.
+        const b3 = a3.filter((n) => { return n != 1}); // bool를 return 받는다 -> True만 걸러내준다
+        console.log('a3의 값은:',a3); // 1,2,3
+        console.log('b3의 값은:',b3); // 2,3
 
+        console.log("4.================ 잘라내기 (slice)"); // 배열 사이에 값 넣을때 많이 사용한다.
+        const a4 = [1,2,3];
+        const b4 = a4.slice(0,2) // *시작 인덱스 + 끝 인덱스 * !!!!끝 인덱스 직전까지만 작동 
+        console.log('a4의 값은:',a4); // 1,2,3
+        console.log('b4의 값은:',b4); // [1,2]
+        // 배열안에서 slice 진행
+        const c4 = [a4.slice(0,2)];
+        console.log('c4의 값은:',c4); // [[1,2]] *배열 안에 배열에 값이 생성
+        // b4와 같이 배열 하나에 값 생성시
+        const d4 = [...a4.slice(0,2)];
+        console.log('d4의 값은:',d4); // [1,2] *스프레이드를 활용하면 된다.
+        // 응용편
+        const e4 = [...a4.slice(0,2), 4, ...a4.slice(2,3)]
+        console.log('e4의 값은:',e4); // [1,2,4,3] 
+
+        console.log("5.================ 반복하기 (map)"); // 삭제할때 많이 사용한다.
+        const a5 = [1,2,3];
+        // Java와 같은 for loop 사용 불가능. 따라서 반복문으로 값을 뿌릴때 forEach사용, 대신 Return 불가로 복사 X 
+        //a5.forEach((n) => {console.log('a5의 값은:', n);}); // Return 불가
+        const b5 = a5.map((n) => n); // 한줄 사용시 중가로 및 return 작성 안해도 됨
+        console.log('b5의 값은 : ', b5); // [1,2,3]
+        const c5 = a5.map((n) => {return n;}); // 한줄 이상일때 중가로 및 return 작성 필요
+        console.log('c5의 값은 : ', c5); // [1,2,3]
+        // 응용편
+        const d5 = a5.map((n) => n + 10); // map의 경우 데이터 가공 가능
+        console.log('d5의 값은 : ', d5); // [11,12,13]
+
+        // 종합 응용편
+        console.log("5.================ 종합 응용편");
+        const data = {phone:"5555"};
+        const a6 = {id:2, name:"진2", phone:"2222", gender:'남', age:18};
+        const b6 = {...a6, ...data}
+        console.log('b6의 값은 : ', b6);
+
+        // map 과 스프레드 사용하여 유저 데이터 업데이트
+        const users = [ // 기존 유저 데이터
+          {id:1, name:"진", phone:"1111", gender:'남'},
+          {id:2, name:"진2", phone:"2222", gender:'남'},
+          {id:3, name:"진3", phone:"3333", gender:'여'}
+        ];
+        // 업데이트 원하는 데이터
+        const updateUserData = {id:2, name:"성진2"};
+        // 모든값을 return 하기 위해서 map 사용. 만약 filter 사용시 true값만 리턴해줌
+        const newUsers = users.map(user => user.id === updateUserData.id ? {...user, ...updateUserData} : user); 
+        console.log('newUsers : ', newUsers)
 
       </script>
   </body>
